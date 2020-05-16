@@ -5,6 +5,8 @@ from sklearn import tree
 import numpy as np
 import csv
 import os
+import graphviz
+import matplotlib.pyplot as plt
 
 
 directory = 'datasets'
@@ -52,7 +54,9 @@ def main():
     clf = DecisionTreeClassifier()
     clf.fit(training_input, training_output)
     print(f' depth = {clf.get_depth()}')
-    tree.plot_tree(clf)
+    dot_data = tree.export_graphviz(clf, out_file=None) 
+    graph = graphviz.Source(dot_data)
+    graph.render("test.pdf")
 
 
 if __name__ == "__main__":
